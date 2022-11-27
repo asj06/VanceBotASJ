@@ -21,20 +21,18 @@ BATCH_FILES = {}
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        buttons = [
-            [
-                InlineKeyboardButton('𝐀𝐝𝐝 𝐌𝐞 𝐓𝐨 𝐘𝐨𝐮𝐫 𝐀𝐧𝐨𝐭𝐡𝐞𝐫 𝐆𝐫𝐨𝐮𝐩', url='http://t.me/{temp.U_NAME}?startgroup=true')
-            ],
-            [
-                InlineKeyboardButton('sᴜᴘᴘᴏʀᴛ', url=f"https://t.me/Cyniteofficial"),
-            ],
-            [
-                InlineKeyboardButton('⚡ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ⚡', url='https://t.me/mdisklink_link/2')
-            ]
-            ]
+        buttons =  [[
+            InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            ],[
+            InlineKeyboardButton('ᴜᴘᴅᴀᴛᴇs', url='https://t.me/Movies_Junctions'),
+            InlineKeyboardButton('sᴜᴘᴘᴏʀᴛ', url='https://t.me/JunctionsChat')
+        ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply(script.START_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup)
-        await asyncio.sleep(2) # 😢 https://github.com/EvamariaTG/EvaMaria/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
+        aadibotz = await message.reply_photo(photo="https://telegra.ph/file/53e68931c60b128eb427e.jpg", caption=script.PRIVATEBOT_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup)
+        await asyncio.sleep(10) # Aadi Botz don't remove this line
+        await aadibotz.delete()
+        await message.delete()
+
         if not await db.get_chat(message.chat.id):
             total=await client.get_chat_members_count(message.chat.id)
             await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
@@ -45,8 +43,7 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
         buttons = [[
-           
-            InlineKeyboardButton('🎁Sᴜʀᴘʀɪsᴇ 🎁', callback_data='start')
+            InlineKeyboardButton('ᴄʟɪᴄᴋ ʜᴇʀᴇ ғᴏʀ ᴍᴏʀᴇ ʙᴜᴛᴛᴏɴs', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -65,7 +62,7 @@ async def start(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "🤖 JOIN UPDATES CHANNEL 🤖", url=invite_link.invite_link
+                    "JOIN UPDATES CHANNEL", url=invite_link.invite_link
                 )
             ]
         ]
@@ -86,13 +83,7 @@ async def start(client, message):
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
-            InlineKeyboardButton('➕ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-        ], [
-            InlineKeyboardButton('🔍sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🤖ᴜᴘᴅᴀᴛᴇs', url='https://t.me/TechnicalCynite')
-        ], [
-            InlineKeyboardButton('ℹ️ʜᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('🔰ᴀʙᴏᴜᴛ', callback_data='about')
+            InlineKeyboardButton('ᴄʟɪᴄᴋ ʜᴇʀᴇ ғᴏʀ ᴍᴏʀᴇ ʙᴜᴛᴛᴏɴs', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -242,7 +233,7 @@ async def start(client, message):
         chat_id=message.from_user.id,
         file_id=file_id,
         caption=f_caption,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('ᴊᴏɪɴ', url='https://t.me/Cynitemovies') ] ] ),
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('ᴄʜᴀɴɴᴇʟ', url='https://t.me/MovieoCafe') ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
                     
