@@ -44,8 +44,8 @@ async def save_group(bot, message):
         await message.reply_text(
             text=f"<b>›› 𝚃𝙷𝙰𝙽𝙺𝚂 𝚃𝙾 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿. {message.chat.title} ❣️\n›› 𝙳𝙾𝙽'𝚃 𝙵𝙾𝚁𝙶𝙴𝚃 𝚃𝙾 𝙼𝙰𝙺𝙴 𝙼𝙴 𝙰𝙳𝙼𝙸𝙽.\n›› 𝙸𝚂 𝙰𝙽𝚈 𝙳𝙾𝚄𝙱𝚃𝚂 𝙰𝙱𝙾𝚄𝚃 𝚄𝚂𝙸𝙽𝙶 𝙼𝙴 𝙲𝙻𝙸𝙲𝙺 𝙱𝙴𝙻𝙾𝚆 𝙱𝚄𝚃𝚃𝙾𝙽..⚡⚡.</b>",
             reply_markup=reply_markup)
-    else:
-                settings = await get_settings(message.chat.id)
+        else:
+        settings = await get_settings(message.chat.id)
         if settings["welcome"]:
             for u in message.new_chat_members:
                 if (temp.MELCOW).get('welcome') is not None:
@@ -53,9 +53,11 @@ async def save_group(bot, message):
                         await (temp.MELCOW['welcome']).delete()
                     except:
                         pass
-                temp.MELCOW['welcome'] = await message.reply(f"<b>Hey , {u.mention}, Welcome to {message.chat.title}</b>")
-
-
+                temp.MELCOW['welcome'] = await message.reply_video(
+                video="https://telegra.ph/file/03691465baa774e46506d.mp4",                                               
+                                                 caption=f'<b>ʜᴇʏ {u.mention}, \nᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ɢʀᴏᴜᴘ {message.chat.title}</b>',
+                                                 reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('📢 𝖴𝗉𝖽𝖺𝗍𝖾𝗌', url='https://t.me/MovieoCafe') ] ] )
+                )
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
 async def leave_a_chat(bot, message):
     if len(message.command) == 1:
